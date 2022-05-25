@@ -1,6 +1,6 @@
-dash
-hls
+dash/*
+hls/*
 node_modules
-rec
-streamfile
+rec/*
+streamfile/*
 

@@ -1,0 +1,27 @@
+{
+  "name": "live",
+  "version": "1.0.0",
+  "description": "live stream recorder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doanthaoan/livestream.git"
+  },
+  "keywords": [
+    "stream",
+    "record",
+    "nginx"
+  ],
+  "author": "andt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/doanthaoan/livestream/issues"
+  },
+  "homepage": "https://github.com/doanthaoan/livestream#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

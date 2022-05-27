@@ -5,6 +5,10 @@ const child = require('child_process');
 const { Z_FIXED } = require('zlib');
 
 app.use(express.json())
+
+app.get('/api', (req, res) => {
+    res.send("Hello world");
+})
 app.post('/api/record', (req, res) => {
     // res.send(req.body);
     fs.writeFile(`streamfile/stream-${req.body.name}.sh`, `ffmpeg -re -i rtmp://192.168.110.52/live/bbb -vcodec copy -f flv rtmp://192.168.110.53/live/${req.body.name}`, {mode: 0o775}, function(err) {

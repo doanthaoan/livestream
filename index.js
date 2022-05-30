@@ -39,7 +39,7 @@ app.post('/api/record', (req, res) => {
 }) 
 // Delete video
 app.post('/api/record/:id', (req, res) => {
-    res.send(req.param.id);
+    res.send(req.params.id);
     // delete file
 
     // delete shell file

@@ -25,6 +25,7 @@ app.post('/api/record', (req, res) => {
         if(err) {
             console.log(err)
             // res.send(err);
+            return res.send(err);
         } else {
             let streamFile = `streamfile/stream-${req.body.name}.sh`;
             console.log(`${streamFile} has been saved`);

@@ -60,10 +60,10 @@ app.post('/api/record', (req, res) => {
         } else {
             let streamFile = `streamfile/stream-${req.body.name}.sh`;
             console.log(`${streamFile} has been saved`);
-            child.exec(streamFile);
+            const subprocess = child.exec(streamFile);
             
-            console.log(`${req.body.name} is recording by: `,child);
-            return res.send({'name': streamFile});
+            console.log(`${req.body.name} is recording by: `,subprocess);
+            return res.send(subprocess);
         }
         
     // Save DB info

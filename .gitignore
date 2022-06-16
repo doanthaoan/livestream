@@ -3,4 +3,4 @@ hls/*
 node_modules
 rec/*
 streamfile/*
-
+log/*

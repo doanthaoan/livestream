@@ -51,7 +51,7 @@ app.post('/api/record', (req, res) => {
     // streamRecord(10, 0)
     // res.send(streamRecord(20));
     let streamSource = `${STREAM_PATH}${req.body.name}`; // build stream source based on paticipal ID
-    streamSource = 'rtmp://192.168.110.52/live/bbb' // for test only
+    streamSource = 'rtmp://192.168.224.183:41136/pexip/459e1a22-1814-47fd-ac53-69338166ef4f' // for test only
     fs.writeFile(`streamfile/stream-${req.body.name}.sh`, `ffmpeg -re -i ${streamSource} -vcodec copy -f flv rtmp://192.168.110.53/live/${req.body.name}`, {mode: 0o775}, function(err) {
         if(err) {
             console.log(err)

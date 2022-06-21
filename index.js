@@ -4,18 +4,41 @@ const fs = require('fs');
 const child = require('child_process');
 const { Worker, isMainThread, parentPort, workderData } = require('worker_threads');
 const { rejects } = require('assert');
+const mysql = require('mysql');
 
 const STREAM_PATH = "rtmp://192.168.224.183:41050/";
 
 app.use(express.json())
 
+// MySQL connection
+const dbCon = mysql.createConnection({
+    host: "localhost",
+    user: "dev",
+    password: "fantasy7&",
+    database: "recordapp"
+})
+
 // List videos
 app.get('/api/record', (req, res) => {
-    res.send("Hello world");
+    let sql = "select * from meetings";
+    dbCon.query(sql, function(err , results) {
+        if (err) res.send(err);
+        res.send(results);
+    })
+    // res.send("Hello world");
 })
 // get video 
 app.get('/api/record/:id', (req, res) => {
-    // res.send(req.param.id);
+    // need to check id first
+    let sql = `select * from meetings where uuid = '${req.params.id}'`;
+    dbCon.query(sql, function(err , results) {
+        if (err) res.send(err);
+        if(results && results.length > 0)
+            res.send(results);
+        else {
+            res.send(`No result with id: ${req.params.id}`)
+        }
+    })
 })
 // Record
 app.post('/api/record', (req, res) => {

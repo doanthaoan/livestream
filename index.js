@@ -4,18 +4,20 @@ const fs = require('fs');
 const child = require('child_process');
 const { Worker, isMainThread, parentPort, workderData } = require('worker_threads');
 const { rejects } = require('assert');
+const dotenv = require('dotenv');
 const mysql = require('mysql');
 
 const STREAM_PATH = "rtmp://192.168.224.183:41050/";
 
 app.use(express.json())
+dotenv.config();
 
 // MySQL connection
 const dbCon = mysql.createConnection({
-    host: "localhost",
-    user: "dev",
-    password: "fantasy7&",
-    database: "recordapp"
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DB
 })
 
 // List videos
@@ -32,7 +34,10 @@ app.get('/api/record/:id', (req, res) => {
     // need to check id first
     let sql = `select * from meetings where uuid = '${req.params.id}'`;
     dbCon.query(sql, function(err , results) {
-        if (err) res.send(err);
+        if (err) {
+            res.send(err);
+            return;
+        }
         if(results && results.length > 0)
             res.send(results);
         else {
@@ -40,7 +45,11 @@ app.get('/api/record/:id', (req, res) => {
         }
     })
 })
-// Record
+
+// Record 
+// Only save to DB, the recording function is auto by using nginx setting
+// with the trigger by calling Pexip Dial API for streaming.
+
 app.post('/api/record', (req, res) => {
 
     // const streamRecord = (meetingId, streamId) => {

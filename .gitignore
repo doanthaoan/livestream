@@ -4,3 +4,5 @@ node_modules
 rec/*
 streamfile/*
 log/*
+.env
+.env.test

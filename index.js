@@ -109,6 +109,8 @@ app.post('/api/record', (req, res) => {
     let db = DbService.getDbServiceInstance();
     const result = db.insertMeeting(samplePostedData);
     console.log(result);
+    result.then((data) => res.json({"data": data}))
+    .catch(err => console.log(err));
 }) 
 
 // Delete video
